@@ -16,7 +16,7 @@ async function init() {
   } catch (err) {
     ShowError(err.message);
   } finally {
-    loader.classList.add('hidder');
+    loader.classList.add('hidden');
   }
 }
 
@@ -44,14 +44,34 @@ async function HandleBreedChange() {
   }
 }
 
+// function displayCatInfo(cat) {
+//   const { name, description, temperament } = cat.breeds[0];
+//   document.querySelector('.cat-image').src = cat.url;
+//   document.querySelector('.cat-name').textContent = name;
+//   document.querySelector('.cat-description').textContent = description;
+//   document.querySelector(
+//     '.cat-temperament'
+//   ).textContent = `Temperament: ${temperament}`;
+//   catInfo.classList.remove('hidden');
+// }
+
 function displayCatInfo(cat) {
+  if (!cat || !cat.breeds || cat.breeds.length === 0) {
+    Notiflix.Notify.failure('Details not found for the selected breed.');
+    return;
+  }
+
+  const { url } = cat;
   const { name, description, temperament } = cat.breeds[0];
-  document.querySelector('.cat-image').src = cat.url;
+
+  document.querySelector('.cat-image').src = url;
+  document.querySelector('.cat-image').alt = name;
   document.querySelector('.cat-name').textContent = name;
   document.querySelector('.cat-description').textContent = description;
   document.querySelector(
     '.cat-temperament'
-  ).textContent = `Temperament: ${temperament}`;
+  ).textContent = ` Temperament: ${temperament}`;
+
   catInfo.classList.remove('hidden');
 }
 

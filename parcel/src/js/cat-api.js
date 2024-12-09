@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.headers.common['x-api-key'] = 'KEY_TA_API';
+axios.defaults.headers.common['x-api-key'] = 'CHEIA_TA_API';
 
 export async function fetchBreeds() {
   try {
@@ -18,6 +18,17 @@ export async function fetchCatByBreed(breedId) {
     );
     return response.data[0];
   } catch (error) {
-    throw new Error('Failed to fetch cat details');
+    throw new Error('Failed to fetch cat details.');
   }
 }
+
+// export async function fetchCatByBreed(breedId) {
+//   try {
+//     const response = await axios.get(`
+//       https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}
+//     `);
+//     return response.data;
+//   } catch (error) {
+//     throw new Error('Failed to fetch cat details.');
+//   }
+// }
